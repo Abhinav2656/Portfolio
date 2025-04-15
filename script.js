@@ -176,64 +176,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add this to your existing script.js file
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Theme toggle functionality
+document.addEventListener('DOMContentLoaded', function () {
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
-    
-    // Check for saved theme preference or use device preference
     const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
     const savedTheme = localStorage.getItem('theme');
-    
-    // Set initial theme
-    if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
-        document.documentElement.setAttribute('data-theme', 'dark');
+    const root = document.documentElement;
+  
+    if (savedTheme) {
+      root.setAttribute('data-theme', savedTheme);
+    } else if (prefersDarkScheme.matches) {
+      root.setAttribute('data-theme', 'dark');
     } else {
-        document.documentElement.setAttribute('data-theme', 'light');
+      root.setAttribute('data-theme', 'light');
     }
-    
-    // Toggle theme when button is clicked
-    themeToggleBtn.addEventListener('click', function() {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        let targetTheme = 'light';
-        
-        if (currentTheme === 'light') {
-            targetTheme = 'dark';
-        }
-        
-        document.documentElement.setAttribute('data-theme', targetTheme);
-        localStorage.setItem('theme', targetTheme);
-        
-        // Trigger skill bar animation on theme switch
-        if (isElementInViewport(document.getElementById('skills'))) {
-            animateSkillBars();
-        }
+  
+    themeToggleBtn.addEventListener('click', function () {
+      const currentTheme = root.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
     });
-    
-    // Helper function to check if element is in viewport
-    function isElementInViewport(el) {
-        if (!el) return false;
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.bottom >= 0
-        );
-    }
-    
-    // Update header class based on scroll position
-    function updateHeaderClass() {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    }
-    
-    function toggleSkills() {
-        const profile = document.querySelector('.profile-img-placeholder');
-        profile.classList.toggle('active');
-    }
-
-    window.addEventListener('scroll', updateHeaderClass);
-    updateHeaderClass(); // Run once on load
-});
+  });
+  
