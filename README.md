@@ -4,7 +4,7 @@
 Welcome to my personal developer portfolio! This is a fully responsive, modern, and animated website to showcase my **skills, projects, resume**, and **contact details**.
 
 ### 🌐 Live Preview  
-> [Click here to view the website](#)  
+> [Click here to view the website](https://portfolio-sepia-pi-85.vercel.app/)  
 _(Replace `#` with your deployed portfolio link)_
 
 ---
