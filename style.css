@@ -704,7 +704,7 @@ nav ul li a:hover::after {
 .filter-btn {
   padding: 8px 20px;
   border-radius: 25px;
-  background-color: transparent;
+  background-color:#121212;
   border: 1px solid var(--border-color);
   cursor: pointer;
   transition: var(--transition);
