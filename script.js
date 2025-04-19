@@ -113,29 +113,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Form submission handling
-    const contactForm = document.querySelector('.contact-form form');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Example: Simple validation
-            if (!name || !email || !subject || !message) {
-                alert('Please fill all fields');
-                return;
-            }
-            
-            // Example: Form submission (would be replaced with actual AJAX/fetch call)
-            alert(`Thank you for your message, ${name}! I'll get back to you soon.`);
-            contactForm.reset();
-        });
+    const emailField = document.getElementById('email');
+    const replyToField = document.getElementById('replyTo');
+
+    if (emailField && replyToField) {
+    emailField.addEventListener('input', function () {
+        replyToField.value = emailField.value;
+    });
     }
+
     
     // Newsletter subscription handling
     const newsletterForm = document.querySelector('.newsletter-form');

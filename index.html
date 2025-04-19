@@ -440,7 +440,7 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form>
+                    <form action="https://formspree.io/f/xzzenbpn" method="POST">
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" id="name" placeholder="Your Name" required>
@@ -448,6 +448,10 @@
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" id="email" placeholder="Your Email" required>
+                            <input type="hidden" name="_replyto" id="replyTo">
+                            <input type="hidden" name="_autoresponse" value="Thanks for contacting me! I'll reply soon.">
+                            <input type="hidden" name="_subject" value="New message from your portfolio!">
+
                         </div>
                         <div class="form-group">
                             <label for="subject">Subject</label>
