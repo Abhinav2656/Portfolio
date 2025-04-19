@@ -51,7 +51,12 @@ body {
   background-size: 50px 50px;
   background-attachment: fixed;
   background-position: center;
-  animation: bgMove 20s linear infinite;
+  animation: bgMove 60s linear infinite;
+}
+@media (max-width: 768px) {
+  body {
+    animation: none; 
+  }
 }
 
 @keyframes bgMove {
@@ -413,6 +418,10 @@ nav ul li a:hover::after {
 .orbit i:nth-child(8) { top: 20%; left: 15%; transform: translate(-50%, -50%); }
 .orbit i:nth-child(9) { top: 0%; left: 50%; transform: translate(-50%, -50%); }
 
+.orbit, .hero, .project-card {
+  will-change: transform, opacity; 
+}
+
 /* Rotation Animation */
 @keyframes rotate {
   from { transform: rotate(0deg); }
@@ -488,11 +497,12 @@ nav ul li a:hover::after {
   padding: 20px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
-  transition: var(--transition);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .skill-item:hover {
   transform: translateY(-5px);
+  box-shadow: var(--shadow);
 }
 
 .skill-icon {
@@ -728,12 +738,13 @@ nav ul li a:hover::after {
   background-color: var(--light-color);
   border-radius: var(--border-radius);
   overflow: hidden;
-  box-shadow: var(--shadow);
+  box-shadow: none;
   transition: var(--transition);
 }
 
 .project-card:hover {
   transform: translateY(-10px);
+  box-shadow: var(--shadow);
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
