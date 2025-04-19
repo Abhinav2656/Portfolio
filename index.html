@@ -9,6 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 </head>
+<div id="popup-modal" class="popup-modal">
+    <div class="popup-content">
+      <span class="close-popup">&times;</span>
+      <p id="popup-message"></p>
+    </div>
+  </div>
+  
 <body>
     <!-- Header Section -->
     <header>
@@ -449,8 +456,12 @@
                             <label for="email">Email</label>
                             <input type="email" id="email" placeholder="Your Email" required>
                             <input type="hidden" name="_replyto" id="replyTo">
+                            <input type="hidden" name="_subject" id="dynamicSubject">
                             <input type="hidden" name="_autoresponse" value="Thanks for contacting me! I'll reply soon.">
-                            <input type="hidden" name="_subject" value="New message from your portfolio!">
+
+                            <!-- Add this response message container -->
+                            <div id="response-message" style="display: none; margin-top: 20px; color: green; font-weight: 600;"></div>
+
 
                         </div>
                         <div class="form-group">

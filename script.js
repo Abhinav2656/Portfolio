@@ -113,14 +113,66 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Form submission handling
-    const emailField = document.getElementById('email');
-    const replyToField = document.getElementById('replyTo');
-
-    if (emailField && replyToField) {
-    emailField.addEventListener('input', function () {
+    const contactForm = document.querySelector('.contact-form form');
+    const popupModal = document.getElementById('popup-modal');
+    const popupMessage = document.getElementById('popup-message');
+    const closePopup = document.querySelector('.close-popup');
+    
+    if (contactForm) {
+      const emailField = document.getElementById('email');
+      const replyToField = document.getElementById('replyTo');
+      const messageField = document.getElementById('message');
+      const subjectField = document.getElementById('dynamicSubject');
+    
+      // Sync email
+      emailField?.addEventListener('input', () => {
         replyToField.value = emailField.value;
-    });
+      });
+    
+      // Dynamic subject from message
+      messageField?.addEventListener('input', () => {
+        const msg = messageField.value;
+        const preview = msg.length > 60 ? msg.substring(0, 57) + '...' : msg;
+        subjectField.value = `New message: ${preview}`;
+      });
+    
+      contactForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+    
+        const formData = new FormData(contactForm);
+    
+        fetch(contactForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        })
+        .then(response => {
+          if (response.ok) {
+            popupMessage.innerText = "✅ Thanks for your message! I'll get back to you soon.";
+            contactForm.reset();
+          } else {
+            popupMessage.innerText = "❌ Oops! Something went wrong. Please try again.";
+          }
+          popupModal.style.display = 'flex';
+        })
+        .catch(() => {
+          popupMessage.innerText = "❌ Network error. Please try again.";
+          popupModal.style.display = 'flex';
+        });
+      });
     }
+    
+    // Close modal on click
+    closePopup?.addEventListener('click', () => {
+      popupModal.style.display = 'none';
+    });
+    
+    // Optional: auto-close after 5s
+    setTimeout(() => {
+      popupModal.style.display = 'none';
+    }, 5000);
+    
+
 
     
     // Newsletter subscription handling
